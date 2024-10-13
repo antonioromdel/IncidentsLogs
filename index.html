@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Incidencias</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="./js/index.js"></script>
+    <script src="./js/functions.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body id="body">
+
+    <header class="header">
+        <button class="btn btnToogle">Modo Claro</button>
+        <a class="btn" href="./registroIT.html">Registro de Incidencias</a>
+    </header>
+
+    <h1>Formulario de registro de Incidencias</h1>
+
+    <form id="form" action="" class="form">
+
+        <fieldset class="form__datas">
+            <legend>Datos del cliente</legend>
+            <div class="datas__form user">
+                <label for="userName">Nombre completo:</label>
+                    <input type="text" name="userName" id="userName" required>
+            </div>
+            <div class="datas__form">
+                <label for="">Número Móvil: <span class="error">El número móvil debe tener 9 dígitos.</span> </label>
+                <input class="number" onchange="checknumber()" type="number" inputmode="numeric" name="numberUser" id="numberUser" pattern="\d{9}" maxlength="9" required>
+            </div>
+            <div class="datas__form">
+                <label for="">Email:</label>
+                    <input type="email" name="emailUser" id="emailUser" required>
+            </div>
+
+            <div class="datas__form">
+                <label for="">Dirección:</label>
+                    <input type="text" name="direccionUser" id="direccionUser" required>
+            </div>
+                
+        </fieldset>
+
+        <fieldset class="form__datas">
+            <legend>Información de la conexión</legend>
+            <div class="datas__form">
+                <label for="typeConnection">Tipo de conexión:</label>
+            <div class="options_connections">
+                <label for="fibra"> Fibra Óptica
+                    <input type="radio" name="typeConnection" value="Fibra" id="fibra" required>
+                </label> 
+                <label for="ADSL"> ADSL
+                    <input type="radio" name="typeConnection" value="ADSL" id="ADSL">
+                </label> 
+                <label for="satelite"> Satélite
+                    <input type="radio" name="typeConnection" value="satelite" id="satelite">
+                </label> 
+            </div>
+                
+            </div>
+            
+            <div class="datas__form">
+                <label for="proveedor">Proveedor de conexión:</label>
+                <select name="proveedor" id="proveedor" required>
+                    <option value="Orange">Orange</option>
+                    <option value="Movistar">Movistar</option>
+                    <option value="Vodafone">vodafone</option>
+                </select>
+            </div>
+            
+        </fieldset>
+        <fieldset class="form__datas">
+            <legend>Detalles de la incidencia</legend>
+            <div class="datas__form">
+                <label for="">Tipo de incidencia:</label>
+                <div class="form_incidents">
+                    <label for="desconexion">Corte Total</label>
+                    <input type="radio" name="typeIT" id="desconexion" value="Desconexion" required>
+                </div>
+                <div class="form_incidents">
+                    <label for="Lentitud">Lentitud</label>
+                    <input type="radio" id="Lentitud" name="typeIT" value="Lentitud">
+                </div>
+                <div class="form_incidents">
+                    <label for="cortes">Cortes de conexión</label>
+                    <input type="radio" id="cortes" name="typeIT" value="Cortes">
+                </div>
+            </div>
+            <div class="datas__form">
+                <label for="dateIncident">Fecha:</label>
+                <input type="text" readonly name="dateIncident" id="dateIncident" required>
+                <div class="datas__form">
+                    <label for="frecuenciaIncedent">Frecuencia de la incidencia:</label>
+                    <div class="datas__form periocidad">
+                        <label for="firstTime">Primera vez
+                            <input type="radio" name="periocidad" value="Primera vez" id="firstTime" required>
+                        </label>
+                        <label for="sometimes">A veces
+                            <input type="radio" name="periocidad" value="A veces" id="sometimes">
+                        </label>
+                        <label for="recurrente">Recurrente
+                            <input type="radio" name="periocidad" value="recurrente" id="recurrente">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="datas__form">
+                <label for="descriptionIT">Descripción de la incidencia:</label>
+                <textarea required name="descriptionIT" id="descriptionIT"></textarea>
+            </div>
+        </fieldset>
+        <div class="btns">
+            <input id="enviar" type="submit" value="Enviar" class="btn">
+            <input id="reestablecer" type="reset" value="Reestablecer formulario" class="btn">
+        </div>
+    </form>
+
+    <div class="notification">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#7bc62d" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+            <path d="M9 12l2 2l4 -4" />
+          </svg>
+
+          <h3>Incidencia registrada correctamente</h3>
+    </div>
+    
+    <script>
+        function checknumber() {
+        const valueNumber = document.querySelector(".number").value
+        const error = document.querySelector(".error")
+        
+        if(valueNumber.length != 9) {
+            error.classList.add("show")
+            
+        } else {
+            error.classList.remove("show")
+        }
+        
+    }
+
+    function getDateToday(){
+        let date = new Date()
+        let day = date.getDate()
+        let month = date.getMonth()+1
+        let year = date.getFullYear()
+        let hour = date.getHours()
+        let minits = date.getMinutes()
+        let seconds = date.getSeconds() < 10 ? `0${date.getSeconds()}`: `${date.getSeconds()}`
+
+        let currentDate = `${day}/${month}/${year} - ${hour}:${minits}:${seconds}`
+
+        const dateIncident = document.getElementById("dateIncident")
+        dateIncident.value = currentDate
+    }
+    setInterval(() => {
+        getDateToday()
+            
+        }, 1000)
+
+    </script>
+
+</body>
+</html>
