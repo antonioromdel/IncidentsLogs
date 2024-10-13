@@ -29,7 +29,7 @@ window.addEventListener("DOMContentLoaded", () => {
         
             let itlist = JSON.parse(localStorage.getItem("itlist"))
         
-            itlist = itlist.length > 0 ? itlist : []
+            itlist = itlist ? itlist : []
 
         itlist.push(itSave)
         localStorage.setItem("itlist", JSON.stringify(itlist))
