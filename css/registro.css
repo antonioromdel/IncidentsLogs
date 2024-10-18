@@ -25,8 +25,6 @@ th{
     background-color: rgb(134, 134, 134);
 }
 
-
-
 .btnDelete{
     height: 40px;
     width: 40px;
@@ -37,3 +35,10 @@ th{
     align-items: center;
 }
 
+.search{
+    margin-top: 2rem;
+}
+
+.hidden{
+    display: none;
+}

@@ -2,7 +2,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const table = document.querySelector(".tableBody")
     const divtable = document.querySelector(".tablaRegistros")
-    
+    const search = document.querySelector(".search")
     
     function loadIts() {
         let its = JSON.parse(localStorage.getItem("itlist"))
@@ -14,7 +14,7 @@ window.addEventListener("DOMContentLoaded", () => {
         checkit.forEach((element, index) => {
 
             table.innerHTML += `
-            <tr>
+            <tr class="rowIncident">
                 <td>${element.userName}</td>
                 <td>${element.numberUser}</td>
                 <td>${element.emailUser}</td>
@@ -41,6 +41,7 @@ window.addEventListener("DOMContentLoaded", () => {
             deletebtn.forEach(myBtn => {
                 myBtn.onclick = () => deleteIt(index, checkit)
             })
+            
         });
 
     } else {
@@ -58,6 +59,31 @@ window.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("itlist", JSON.stringify(checkit))
         loadIts()
     }
+
+    function searchIncident(input){
+
+        const rows = document.querySelectorAll(".rowIncident")
+        counterRows = 0
+
+        rows.forEach(row => {
+            let text = row.innerText.toLowerCase()
+            console.log("hola")
+
+            if(text.includes(input.toLowerCase() )){
+                row.classList.remove("hidden")
+                counterRows++
+            } else {
+                row.classList.add("hidden")
+            }
+        })
+
+    }
+
+    search.addEventListener("input", () => {
+
+        searchIncident(search.value)
+
+    })
 
     loadIts()
 
