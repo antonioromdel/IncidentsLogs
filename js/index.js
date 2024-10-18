@@ -4,6 +4,8 @@ window.addEventListener("DOMContentLoaded", () => {
     
     const form = document.getElementById("form")
     const notification = document.querySelector(".notification")
+    const loading = document.querySelector(".loading")
+
     
     const myForm = (e) => {
         const formDate = new FormData(e.target)
@@ -15,8 +17,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
         return myIT
     }
-
-    
 
     form.addEventListener("submit", (e) => {
         e.preventDefault()
@@ -35,11 +35,15 @@ window.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("itlist", JSON.stringify(itlist))
         form.reset()
 
-        notification.classList.add("show")
-
+        loading.classList.add("show")
         setTimeout(() => {
-            notification.classList.remove("show")
-        }, 3000)
+             loading.classList.remove("show")
+             notification.classList.add("show")
+         }, 2000)
+
+         setTimeout(() => {
+             notification.classList.remove("show")
+         }, 3500)
         }
     })
 })
